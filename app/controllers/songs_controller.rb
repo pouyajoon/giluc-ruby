@@ -11,14 +11,13 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
-
-  def analyseChords chords
+  def analyseChords chords, modulo
     @ints = @chords.map {|c| c.to_i}
 
     @res = Array.new
     @ints.each_with_index do |value, index|
 
-      nextIndex = (index + 1) % @ints.length;
+      nextIndex = (index + 1) % modulo
       diffWithNextIndex = (@ints[nextIndex] - @ints[index])
       logger.info ("i #{index} #{nextIndex} #{diffWithNextIndex}")
 
@@ -37,19 +36,25 @@ class SongsController < ApplicationController
           @res << 'vs'
         end              
       end
-
-      # @res << {"v" => value, "i" => index}
     end
-
     return @res
-
   end
 
   # GET /songs/1
   # GET /songs/1.json
   def show
     @chords = @song.chords.split(',')
-    @analyse = analyseChords @chords
+
+    @modulo = params[:modulo]
+    @analyses = Array.new
+    if (@modulo == nil)
+      @analyses << {'m' => @chords.length, 'a' => (analyseChords @chords, @chords.length)}
+    else      
+      list = @modulo.split(',').map {|e| e.to_i}
+      list.each do |m|
+        @analyses << {'m' => m, 'a' => (analyseChords @chords, m)}
+      end
+    end
   end
 
   # GET /songs/new

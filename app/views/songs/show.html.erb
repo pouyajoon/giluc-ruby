@@ -10,8 +10,33 @@
   <%= @song.chords %>
 </p>
 
-Analyse:
-<%= @analyse %>
+<p>
+<strong>Modulos:</strong>
+<%=params[:modulo]%>
+</p>
+
+<strong>Analyse:</strong>
+<% @analyses.each do |analyse| %>
+  <p>
+    <table>
+      <tr>
+        <th>Modulo</th>
+        <th></th>
+        <% @chords.each_with_index do |a, i| %>           
+          <th><%= a%></th>
+        <% end %>
+
+      </tr>
+      <tr>
+        <td><%= analyse['m'] %></td>
+        <% analyse['a'].each do |a| %>           
+          <td><%= a%></td>
+        <% end %>
+      </tr>
+    </table>
+    
+  </p>
+<% end %>
 
 <p>
   <strong>Chords Split:</strong>
