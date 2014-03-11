@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @song.name %>
+</p>
+
+<p>
+  <strong>Chords:</strong>
+  <%= @song.chords %>
+</p>
+
+Analyse:
+<%= @analyse %>
+
+<p>
+  <strong>Chords Split:</strong>
+  <p>
+  <% @chords.each do |c| %>
+    <%= c %><br/>
+  <% end %>
+  </p>
+</p>
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
