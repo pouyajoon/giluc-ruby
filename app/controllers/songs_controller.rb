@@ -50,10 +50,10 @@ class SongsController < ApplicationController
     if (@modulo == nil)
       @analyses << {'m' => @chords.length, 'a' => (analyseChords @chords, @chords.length)}
     else      
-      list = @modulo.split(',').map {|e| e.to_i}
-      list.each do |m|
+      @modulo.split(',').map {|e| e.to_i}.each do |m|
         @analyses << {'m' => m, 'a' => (analyseChords @chords, m)}
       end
+      
     end
   end
 
