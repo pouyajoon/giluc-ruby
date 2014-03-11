@@ -10,6 +10,8 @@
   <%= @song.chords %>
 </p>
 
+<p><STRONG>Chords Size:</STRONG><%= @chords.length %></p>
+
 <p>
 <strong>Modulos:</strong>
 <%=params[:modulo]%>
@@ -21,14 +23,15 @@
     <table>
       <tr>
         <th>Modulo</th>
-        <th></th>
         <% @chords.each_with_index do |a, i| %>           
           <th><%= a%></th>
         <% end %>
+        <th></th>
 
       </tr>
       <tr>
         <td><%= analyse['m'] %></td>
+        <td></td>
         <% analyse['a'].each do |a| %>           
           <td><%= a%></td>
         <% end %>
